@@ -68,7 +68,6 @@ class NotificationHelper extends ContextWrapper {
     */
     public Notification.Builder getNotification1(String title, String body) {
         //new NotificationCompat.Builder(getApplicationContext(), "aaa");
-
         return new Notification.Builder(getApplicationContext(), PRIMARY_CHANNEL)
                  .setContentTitle(title)
                  .setContentText(body)
@@ -124,5 +123,24 @@ class NotificationHelper extends ContextWrapper {
         return manager;
     }
 
+    private Notification compatTest(String title, String body) {
+        Notification n = null;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ) {
+            n = new Notification.Builder(getApplicationContext(), PRIMARY_CHANNEL)
+                    .setContentTitle(title)
+                    .setContentText(body)
+                    .setSmallIcon(getSmallIcon())
+                    .setAutoCancel(true)
+                    .build();
+        } else {
+            n = new NotificationCompat.Builder(getApplicationContext())
+                    .setContentTitle(title)
+                    .setContentText(body)
+                    .setSmallIcon(getSmallIcon())
+                    .setAutoCancel(true)
+                    .build();
+        }
+        return(n);
+    }
 
 }
