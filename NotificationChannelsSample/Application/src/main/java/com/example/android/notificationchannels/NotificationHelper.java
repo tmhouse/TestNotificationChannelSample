@@ -25,6 +25,7 @@ import android.content.ContextWrapper;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 
 /**
  * Helper class to manage notification channels, and create notifications.
@@ -66,8 +67,9 @@ class NotificationHelper extends ContextWrapper {
      * @return the builder as it keeps a reference to the notification (since API 24)
     */
     public Notification.Builder getNotification1(String title, String body) {
-        //return new Notification.Builder(getApplicationContext(), PRIMARY_CHANNEL)
-        return new Notification.Builder(getApplicationContext())
+        //new NotificationCompat.Builder(getApplicationContext(), "aaa");
+
+        return new Notification.Builder(getApplicationContext(), PRIMARY_CHANNEL)
                  .setContentTitle(title)
                  .setContentText(body)
                  .setSmallIcon(getSmallIcon())
@@ -121,4 +123,6 @@ class NotificationHelper extends ContextWrapper {
         }
         return manager;
     }
+
+
 }
